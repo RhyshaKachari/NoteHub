@@ -21,6 +21,7 @@ class _HomeState extends State<Home> {
       body : SafeArea(
         child: Container(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10, horizontal: 8 ),
@@ -88,7 +89,19 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-              )
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 25 , vertical: 10),
+                child: Column(
+                  children: [
+                    Text("ALL" , style: TextStyle(
+                        color: white.withOpacity(0.5),
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold
+                    ),),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
