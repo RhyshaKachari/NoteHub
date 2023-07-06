@@ -4,6 +4,8 @@ import 'package:notehub/SideMenuBar.dart';
 import 'package:notehub/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import "package:stack_trace/stack_trace.dart";
+
+import 'CreateNoteView.dart';
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -18,6 +20,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context,MaterialPageRoute(builder: (context) => CreateNoteView()) );
+          },
+          backgroundColor: cardColor,
+          child: Icon(Icons.add , size: 45,),
+        ),
       endDrawerEnableOpenDragGesture: true,
       key: _drawerKey,
       drawer: SideMenu(),
