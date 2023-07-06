@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:notehub/colors.dart';
 
+import 'ArchiveView.dart';
+import 'Setting.dart';
+
 class SideMenu extends StatefulWidget {
   const SideMenu({Key? key}) : super(key: key);
 
@@ -24,11 +27,109 @@ class _SideMenuState extends State<SideMenu> {
               Divider(
                 color: white.withOpacity(0.3),
               ),
-              sectionOne(),
+        Container(
+          // padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
+          margin: EdgeInsets.only(right: 10),
+          child: TextButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.lightBlue.withOpacity(0.3)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(50),
+                            bottomRight: Radius.circular(50)
+                        ),)
+                  )
+              )
+              ,
+              onPressed: (){
+              }, child: Container(
+            padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
+            child: Row(
+              children: [
+                Icon(Icons.book ,
+                  size: 30,) ,
+                SizedBox(
+                  width: 27,
+                ),
+                Text("Notes" , style: TextStyle(color: white.withOpacity(0.7) ,
+                    fontSize:18),),
+
+              ],
+            ),
+          )),
+        ),
               SizedBox(height: 5,),
-              sectionTwo(),
+        Container(
+          // padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
+          margin: EdgeInsets.only(right: 10),
+          child: TextButton(
+              style: ButtonStyle(
+                // backgroundColor: MaterialStateProperty.all(Colors.lightBlue.withOpacity(0.3)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(50),
+                            bottomRight: Radius.circular(50)
+                        ),)
+                  )
+              )
+              ,
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Archive()));
+              }, child: Container(
+            padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
+            child: Row(
+              children: [
+                Icon(Icons.archive_outlined ,
+                  size: 30,) ,
+                SizedBox(
+                  width: 27,
+                ),
+                Text("Archive" , style: TextStyle(color: white.withOpacity(0.7) ,
+                    fontSize:18),),
+
+              ],
+            ),
+          )),
+        ),
               SizedBox(height: 5,),
-              settings_section(),
+
+
+
+        Container(
+          // padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
+          margin: EdgeInsets.only(right: 10),
+          child: TextButton(
+              style: ButtonStyle(
+                // backgroundColor: MaterialStateProperty.all(Colors.lightBlue.withOpacity(0.3)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(50),
+                            bottomRight: Radius.circular(50)
+                        ),)
+                  )
+              )
+              ,
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Settings()));
+              }, child: Container(
+            padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
+            child: Row(
+              children: [
+                Icon(Icons.settings ,
+                  size: 30,) ,
+                SizedBox(
+                  width: 27,
+                ),
+                Text("Settings" , style: TextStyle(color: white.withOpacity(0.7) ,
+                    fontSize:18),),
+
+              ],
+            ),
+          )),
+        ),
             ],
           ),
         ),
@@ -36,107 +137,116 @@ class _SideMenuState extends State<SideMenu> {
     );
   }
 }
-Widget sectionOne(){
-  return Container(
-    // padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
-    margin: EdgeInsets.only(right: 10),
-    child: TextButton(
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.lightBlue.withOpacity(0.3)),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(50),
-                      bottomRight: Radius.circular(50)
-                  ),)
-            )
-        )
-        ,
-        onPressed: (){
-        }, child: Container(
-      padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
-      child: Row(
-        children: [
-          Icon(Icons.book ,
-            size: 30,) ,
-          SizedBox(
-            width: 27,
-          ),
-          Text("Notes" , style: TextStyle(color: white.withOpacity(0.7) ,
-              fontSize:18),),
+// Widget sectionOne(){
+//   return Container(
+//     // padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
+//     margin: EdgeInsets.only(right: 10),
+//     child: TextButton(
+//         style: ButtonStyle(
+//             backgroundColor: MaterialStateProperty.all(Colors.lightBlue.withOpacity(0.3)),
+//             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+//                 RoundedRectangleBorder(
+//                   borderRadius: BorderRadius.only(
+//                       topRight: Radius.circular(50),
+//                       bottomRight: Radius.circular(50)
+//                   ),)
+//             )
+//         )
+//         ,
+//         onPressed: (){
+//         }, child: Container(
+//       padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
+//       child: Row(
+//         children: [
+//           Icon(Icons.book ,
+//             size: 30,) ,
+//           SizedBox(
+//             width: 27,
+//           ),
+//           Text("Notes" , style: TextStyle(color: white.withOpacity(0.7) ,
+//               fontSize:18),),
+//
+//         ],
+//       ),
+//     )),
+//   );
+// }
+//
+//
+//
+//
+//
 
-        ],
-      ),
-    )),
-  );
-}
+// Widget sectionTwo(){
+//   return Container(
+//     // padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
+//     margin: EdgeInsets.only(right: 10),
+//     child: TextButton(
+//         style: ButtonStyle(
+//             // backgroundColor: MaterialStateProperty.all(Colors.lightBlue.withOpacity(0.3)),
+//             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+//                 RoundedRectangleBorder(
+//                   borderRadius: BorderRadius.only(
+//                       topRight: Radius.circular(50),
+//                       bottomRight: Radius.circular(50)
+//                   ),)
+//             )
+//         )
+//         ,
+//         onPressed: (){
+//         }, child: Container(
+//       padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
+//       child: Row(
+//         children: [
+//           Icon(Icons.archive_outlined ,
+//             size: 30,) ,
+//           SizedBox(
+//             width: 27,
+//           ),
+//           Text("Archive" , style: TextStyle(color: white.withOpacity(0.7) ,
+//               fontSize:18),),
+//
+//         ],
+//       ),
+//     )),
+//   );
+// }
 
-Widget sectionTwo(){
-  return Container(
-    // padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
-    margin: EdgeInsets.only(right: 10),
-    child: TextButton(
-        style: ButtonStyle(
-            // backgroundColor: MaterialStateProperty.all(Colors.lightBlue.withOpacity(0.3)),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(50),
-                      bottomRight: Radius.circular(50)
-                  ),)
-            )
-        )
-        ,
-        onPressed: (){
-        }, child: Container(
-      padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
-      child: Row(
-        children: [
-          Icon(Icons.archive_outlined ,
-            size: 30,) ,
-          SizedBox(
-            width: 27,
-          ),
-          Text("Archive" , style: TextStyle(color: white.withOpacity(0.7) ,
-              fontSize:18),),
 
-        ],
-      ),
-    )),
-  );
-}
 
-Widget settings_section(){
-  return Container(
-    // padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
-    margin: EdgeInsets.only(right: 10),
-    child: TextButton(
-        style: ButtonStyle(
-          // backgroundColor: MaterialStateProperty.all(Colors.lightBlue.withOpacity(0.3)),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(50),
-                      bottomRight: Radius.circular(50)
-                  ),)
-            )
-        )
-        ,
-        onPressed: (){
-        }, child: Container(
-      padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
-      child: Row(
-        children: [
-          Icon(Icons.settings ,
-            size: 30,) ,
-          SizedBox(
-            width: 27,
-          ),
-          Text("Archive" , style: TextStyle(color: white.withOpacity(0.7) ,
-              fontSize:18),),
 
-        ],
-      ),
-    )),
-  );
-}
+// Widget settings_section(){
+//   return Container(
+//     // padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
+//     margin: EdgeInsets.only(right: 10),
+//     child: TextButton(
+//         style: ButtonStyle(
+//           // backgroundColor: MaterialStateProperty.all(Colors.lightBlue.withOpacity(0.3)),
+//             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+//                 RoundedRectangleBorder(
+//                   borderRadius: BorderRadius.only(
+//                       topRight: Radius.circular(50),
+//                       bottomRight: Radius.circular(50)
+//                   ),)
+//             )
+//         )
+//         ,
+//         onPressed: (){
+//           Navigator.push(context, MaterialPageRoute(builder: (context)=>Settings()));
+//         }, child: Container(
+//       padding: EdgeInsets.symmetric(vertical: 5 , horizontal: 5),
+//       child: Row(
+//         children: [
+//           Icon(Icons.settings ,
+//             size: 30,) ,
+//           SizedBox(
+//             width: 27,
+//           ),
+//           Text("Archive" , style: TextStyle(color: white.withOpacity(0.7) ,
+//               fontSize:18),),
+//
+//         ],
+//       ),
+//     )),
+//   );
+// }
