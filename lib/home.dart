@@ -91,77 +91,14 @@ class _HomeState extends State<Home> {
                           ],
                         ),
                       ),
+
                     ],
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 25 , vertical: 10),
-                  child: Column(
-                    children: [
-                      Text("ALL" , style: TextStyle(
-                          color: white.withOpacity(0.5),
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold
-                      ),),
-                    ],
-                  ),
-                ),
+                NoteSectionAll(),
+                NotesListSection(),
 
 
-
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10,vertical: 15,),
-                  child: StaggeredGridView.countBuilder(
-                    physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 10,
-                      mainAxisSpacing: 12,
-                      crossAxisSpacing: 12,
-                      crossAxisCount: 4,
-                      staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-                      itemBuilder: (context,index)=>   Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          // color: skyblue,
-                          border: Border.all(color: Colors.white.withOpacity(0.4)),
-                          borderRadius: BorderRadius.circular(7),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                          Text("HEADING", style: TextStyle(color: white, fontSize: 20,fontWeight: FontWeight.bold),),
-                          SizedBox(height: 10,),
-                          Text(index.isEven? note.length > 250 ? "${note.substring(0,250)}...":note:note1 ,style: TextStyle(color: white),)
-                        ],),
-                      ) ),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10,vertical: 15,),
-                  child: StaggeredGridView.countBuilder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 10,
-                      mainAxisSpacing: 12,
-                      crossAxisSpacing: 12,
-                      crossAxisCount: 4,
-                      staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-                      itemBuilder: (context,index)=>   Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: index.isEven ? skyblue : queenpink,
-                          border: Border.all(color: index.isEven ? skyblue.withOpacity(0.4) : queenpink.withOpacity(0.4)),
-                          borderRadius: BorderRadius.circular(7),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("HEADING", style: TextStyle(color: white, fontSize: 20,fontWeight: FontWeight.bold),),
-                            SizedBox(height: 10,),
-                            Text(index.isEven? note.length > 250 ? "${note.substring(0,250)}...":note:note1 ,
-                              style: TextStyle(color: white),)
-                          ],),
-                      ) ),
-                ),
 
                 // Container(
                 //   padding: EdgeInsets.symmetric(horizontal: 10,vertical: 15,),
@@ -176,8 +113,8 @@ class _HomeState extends State<Home> {
                 //       itemBuilder: (context,index)=>   Container(
                 //         padding: EdgeInsets.all(10),
                 //         decoration: BoxDecoration(
-                //           // color: skyblue,
-                //           border: Border.all(color: Colors.white.withOpacity(0.4)),
+                //           color: index.isEven ? skyblue : queenpink,
+                //           border: Border.all(color: index.isEven ? skyblue.withOpacity(0.4) : queenpink.withOpacity(0.4)),
                 //           borderRadius: BorderRadius.circular(7),
                 //         ),
                 //         child: Column(
@@ -185,36 +122,11 @@ class _HomeState extends State<Home> {
                 //           children: [
                 //             Text("HEADING", style: TextStyle(color: white, fontSize: 20,fontWeight: FontWeight.bold),),
                 //             SizedBox(height: 10,),
-                //             Text(index.isEven? note:note1 ,style: TextStyle(color: white),)
+                //             Text(index.isEven? note.length > 250 ? "${note.substring(0,250)}...":note:note1 ,
+                //               style: TextStyle(color: white),)
                 //           ],),
                 //       ) ),
                 // ),
-                // Container(
-                //   padding: EdgeInsets.symmetric(horizontal: 10,vertical: 15,),
-                //   child: StaggeredGridView.countBuilder(
-                //       physics: NeverScrollableScrollPhysics(),
-                //       shrinkWrap: true,
-                //       itemCount: 10,
-                //       mainAxisSpacing: 12,
-                //       crossAxisSpacing: 12,
-                //       crossAxisCount: 4,
-                //       staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-                //       itemBuilder: (context,index)=>   Container(
-                //         padding: EdgeInsets.all(10),
-                //         decoration: BoxDecoration(
-                //           border: Border.all(color: Colors.white.withOpacity(0.4)),
-                //           borderRadius: BorderRadius.circular(7),
-                //         ),
-                //         child: Column(
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           children: [
-                //             Text("HEADING", style: TextStyle(color: white, fontSize: 20,fontWeight: FontWeight.bold),),
-                //             SizedBox(height: 10,),
-                //             Text(index.isEven? note:note1 ,style: TextStyle(color: white),)
-                //           ],),
-                //       ) ),
-                // ),
-                //
 
 
 
@@ -226,5 +138,115 @@ class _HomeState extends State<Home> {
 
       )
     );
+  }
+  Widget NoteSectionAll(){
+return  Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    Container(
+      margin: EdgeInsets.symmetric(horizontal: 25 , vertical: 10),
+      child: Column(
+        children: [
+          Text("ALL" , style: TextStyle(
+              color: white.withOpacity(0.5),
+              fontSize: 13,
+              fontWeight: FontWeight.bold
+          ),),
+        ],
+      ),
+    ),
+
+
+
+
+    Container(
+      padding: EdgeInsets.symmetric(horizontal: 10,vertical: 15,),
+      child: StaggeredGridView.countBuilder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: 10,
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 12,
+          crossAxisCount: 4,
+          staggeredTileBuilder: (index) => StaggeredTile.fit(2),
+          itemBuilder: (context,index)=>   Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              // color: skyblue,
+              border: Border.all(color: Colors.white.withOpacity(0.4)),
+              borderRadius: BorderRadius.circular(7),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("HEADING", style: TextStyle(color: white, fontSize: 20,fontWeight: FontWeight.bold),),
+                SizedBox(height: 10,),
+                Text(index.isEven? note.length > 250 ? "${note.substring(0,250)}...":note:note1 ,style: TextStyle(color: white),)
+              ],),
+          ) ),
+    ),
+  ],
+);
+
+  }
+  Widget NotesListSection() {
+    return Container(
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "LIST VIEW",
+                    style: TextStyle(
+                        color: white.withOpacity(0.5),
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 15,
+                ),
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 10,
+                  itemBuilder: (context, index) => Container(
+                    padding: EdgeInsets.all(10),
+                    margin: EdgeInsets.only(bottom: 10),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: white.withOpacity(0.4)),
+                        borderRadius: BorderRadius.circular(7)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("HEADING",
+                            style: TextStyle(
+                                color: white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold)),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          index.isEven
+                              ? note.length > 250
+                              ? "${note.substring(0, 250)}..."
+                              : note
+                              : note1,
+                          style: TextStyle(color: white),
+                        )
+                      ],
+                    ),
+                  ),
+                )),
+          ],
+        ));
   }
 }
