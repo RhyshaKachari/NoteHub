@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notehub/NoteView.dart';
+import 'package:notehub/SearchPage.dart';
 import 'package:notehub/SideMenuBar.dart';
 import 'package:notehub/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -59,16 +60,21 @@ class _HomeState extends State<Home> {
                           SizedBox(
                             width: 16,
                           ),
-                          Container(
-                            height: 55,
-                            width: 178,
-                            // decoration: BoxDecoration(border:Border.all(color: Colors.white) ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Search Your Notes" , style: TextStyle(color: white.withOpacity(0.5) , fontSize: 16),),
-                              ],
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => SearchView()));
+                            },
+                            child: Container(
+                              height: 55,
+                              width: 178,
+                              // decoration: BoxDecoration(border:Border.all(color: Colors.white) ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Search Your Notes" , style: TextStyle(color: white.withOpacity(0.5) , fontSize: 16),),
+                                ],
+                              ),
                             ),
                           )
                         ],
