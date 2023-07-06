@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notehub/NoteView.dart';
 import 'package:notehub/SideMenuBar.dart';
 import 'package:notehub/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -169,20 +170,25 @@ return  Column(
           crossAxisSpacing: 12,
           crossAxisCount: 4,
           staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-          itemBuilder: (context,index)=>   Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              // color: skyblue,
-              border: Border.all(color: Colors.white.withOpacity(0.4)),
-              borderRadius: BorderRadius.circular(7),
+          itemBuilder: (context,index)=>   InkWell(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView()));
+            },
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                // color: skyblue,
+                border: Border.all(color: Colors.white.withOpacity(0.4)),
+                borderRadius: BorderRadius.circular(7),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("HEADING", style: TextStyle(color: white, fontSize: 20,fontWeight: FontWeight.bold),),
+                  SizedBox(height: 10,),
+                  Text(index.isEven? note.length > 250 ? "${note.substring(0,250)}...":note:note1 ,style: TextStyle(color: white),)
+                ],),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("HEADING", style: TextStyle(color: white, fontSize: 20,fontWeight: FontWeight.bold),),
-                SizedBox(height: 10,),
-                Text(index.isEven? note.length > 250 ? "${note.substring(0,250)}...":note:note1 ,style: TextStyle(color: white),)
-              ],),
           ) ),
     ),
   ],
