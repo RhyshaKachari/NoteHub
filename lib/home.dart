@@ -4,6 +4,7 @@ import 'package:notehub/SearchPage.dart';
 import 'package:notehub/SideMenuBar.dart';
 import 'package:notehub/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:notehub/services/db.dart';
 import "package:stack_trace/stack_trace.dart";
 
 import 'CreateNoteView.dart';
@@ -18,6 +19,17 @@ class _HomeState extends State<Home> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   String note = "THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE ";
   String note1 = "THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS ";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    createEntry();
+  }
+  Future createEntry() async{
+    await NotesDatabase.instance.InsertEntry();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,37 +124,12 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 NoteSectionAll(),
+                ColorNotes(),
                 NotesListSection(),
 
 
 
-                // Container(
-                //   padding: EdgeInsets.symmetric(horizontal: 10,vertical: 15,),
-                //   child: StaggeredGridView.countBuilder(
-                //       physics: NeverScrollableScrollPhysics(),
-                //       shrinkWrap: true,
-                //       itemCount: 10,
-                //       mainAxisSpacing: 12,
-                //       crossAxisSpacing: 12,
-                //       crossAxisCount: 4,
-                //       staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-                //       itemBuilder: (context,index)=>   Container(
-                //         padding: EdgeInsets.all(10),
-                //         decoration: BoxDecoration(
-                //           color: index.isEven ? skyblue : queenpink,
-                //           border: Border.all(color: index.isEven ? skyblue.withOpacity(0.4) : queenpink.withOpacity(0.4)),
-                //           borderRadius: BorderRadius.circular(7),
-                //         ),
-                //         child: Column(
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           children: [
-                //             Text("HEADING", style: TextStyle(color: white, fontSize: 20,fontWeight: FontWeight.bold),),
-                //             SizedBox(height: 10,),
-                //             Text(index.isEven? note.length > 250 ? "${note.substring(0,250)}...":note:note1 ,
-                //               style: TextStyle(color: white),)
-                //           ],),
-                //       ) ),
-                // ),
+
 
 
 
@@ -269,5 +256,37 @@ return  Column(
                 )),
           ],
         ));
+  }
+
+  Widget ColorNotes(){
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10,vertical: 15,),
+      child: StaggeredGridView.countBuilder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: 10,
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 12,
+          crossAxisCount: 4,
+          staggeredTileBuilder: (index) => StaggeredTile.fit(2),
+          itemBuilder: (context,index)=>   Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: index.isEven ? skyblue : queenpink,
+              border: Border.all(color: index.isEven ? skyblue.withOpacity(0.4) : queenpink.withOpacity(0.4)),
+              borderRadius: BorderRadius.circular(7),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("HEADING", style: TextStyle(color: white, fontSize: 20,fontWeight: FontWeight.bold),),
+                SizedBox(height: 10,),
+                Text(index.isEven? note.length > 250 ? "${note.substring(0,250)}...":note:note1 ,
+                  style: TextStyle(color: white),)
+              ],),
+          )
+      ),
+    );
+
   }
 }
