@@ -6,10 +6,10 @@ class NotesDatabase{
   NotesDatabase._init();
   Future<Database?>get database async{
     if(_database != null){
-      return _database;
+      return _database;}
       _database = await _initializeDB('Notes.db');
       return _database ;
-  }
+
 }
 
 Future<Database>_initializeDB(String filepath) async{
@@ -30,7 +30,27 @@ Future _createDB(Database db , int version) async{
     ''');}
     Future<bool?>InsertEntry() async{
       final db = await instance.database;
-      await db!.insert("Notes", {"pin" : false , "title" : "THIS IS MY TITLE" , "content" : "THIS IS MY NOTE CONTENT", "createdTime" : "26 Jan 2018"});
+      await db!.insert("Notes", {"pin" : 0 , "title" : "THIS IS MY TITLE" , "content" : "THIS IS MY NOTE CONTENT", "createdTime" : "26 Jan 2018"});
       return true;
     }
+
+    Future<String> readAllNotes() async{
+    final db = await instance.database ;
+    final orderBy = 'createdTime ASC' ;
+    final query_result = await db!.query("Notes" , orderBy: orderBy) ;
+    print(query_result);
+    return "Successful" ;
+
+    }
+  Future<String?>readOneNote(int id)async{
+    final db = await instance.database;
+    final map = await db!.query("Notes" ,
+      columns: ["title"] ,
+      where: 'id = ?',
+        whereArgs: [id]
+    );
+    print(map);
+
+
+  }
 }
