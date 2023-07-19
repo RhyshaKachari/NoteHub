@@ -6,6 +6,7 @@ import 'package:notehub/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:notehub/services/db.dart';
 import "package:stack_trace/stack_trace.dart";
+import 'package:notehub/model/MyNoteModel.dart';
 
 import 'CreateNoteView.dart';
 class Home extends StatefulWidget {
@@ -24,13 +25,11 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    createEntry();
-    getAllNotes();
-    // getOneNote();
+
   }
   //to create note
-  Future createEntry() async{
-    await NotesDatabase.instance.InsertEntry();
+  Future createEntry(Note note) async{
+    await NotesDatabase.instance.InsertEntry(note);
   }
   //to read notes
   Future getAllNotes() async{
@@ -38,15 +37,19 @@ class _HomeState extends State<Home> {
   }
 
   //to get one note
-  Future getOneNote() async{
-    await NotesDatabase.instance.readOneNote(2);
+  Future getOneNote(int id) async{
+    await NotesDatabase.instance.readOneNote(id);
   }
 
   //to update one note
-  Future  updateOneNote() async{
-    await NotesDatabase.instance.updateNote(3);
+  Future  updateOneNote(Note note) async{
+    await NotesDatabase.instance.updateNote(note);
   }
 
+  //to delete one note
+  Future deleteOneNote(Note note) async{
+    await NotesDatabase.instance.deleteNode(note);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
