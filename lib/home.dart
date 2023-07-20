@@ -10,6 +10,7 @@ import 'package:notehub/model/MyNoteModel.dart';
 
 import 'CreateNoteView.dart';
 class Home extends StatefulWidget {
+
   const Home({Key? key}) : super(key: key);
 
   @override
@@ -17,6 +18,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool isLoading = true ;
+  late List<Note> notesList;
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   String note = "THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE ";
   String note1 = "THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS ";
@@ -25,7 +28,8 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
+  createEntry(Note(pin: false, title: "Code with Rhysha", content: "la l ala all a", createdTime: DateTime.now()));
+  getAllNotes();
   }
   //to create note
   Future createEntry(Note note) async{
@@ -33,7 +37,10 @@ class _HomeState extends State<Home> {
   }
   //to read notes
   Future getAllNotes() async{
-    await NotesDatabase.instance.readAllNotes();
+   this.notesList =  await NotesDatabase.instance.readAllNotes();
+   setState(() {
+     isLoading = false;
+   });
   }
 
   //to get one note
@@ -52,7 +59,7 @@ class _HomeState extends State<Home> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isLoading ? Scaffold( backgroundColor: bgColor, body: Center(child: CircularProgressIndicator(color: Colors.white,),),) : Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(context,MaterialPageRoute(builder: (context) => CreateNoteView()) );
@@ -187,7 +194,7 @@ return  Column(
       child: StaggeredGridView.countBuilder(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: 10,
+          itemCount: notesList.length,
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
           crossAxisCount: 4,
@@ -206,9 +213,9 @@ return  Column(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("HEADING", style: TextStyle(color: white, fontSize: 20,fontWeight: FontWeight.bold),),
+                  Text(notesList[index].title, style: TextStyle(color: white, fontSize: 20,fontWeight: FontWeight.bold),),
                   SizedBox(height: 10,),
-                  Text(index.isEven? note.length > 250 ? "${note.substring(0,250)}...":note:note1 ,style: TextStyle(color: white),)
+                  Text(notesList[index].content.length > 250 ? "${notesList[index].content.substring(0,250)}...":notesList[index].content ,style: TextStyle(color: white),)
                 ],),
             ),
           ) ),
