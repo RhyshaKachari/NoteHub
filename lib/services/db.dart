@@ -30,7 +30,7 @@ Future _createDB(Database db , int version) async{
     ${NotesImpNames.pin} $boolType,
     ${NotesImpNames.title} $textType,
     ${NotesImpNames.content} $textType,
-    ${NotesImpNames.createdTime} $textType,
+    ${NotesImpNames.createdTime} $textType
     )
     ''');}
     Future<Note?>InsertEntry(Note note) async{
@@ -70,6 +70,26 @@ Future _createDB(Database db , int version) async{
       whereArgs: [note.id]
     );
   }
+  Future<List<int>> getNoteString(String query) async{
+
+    final db = await instance.database;
+    final result = await db!.query(NotesImpNames.TableName);
+    //iss upar wali line se jitni bhi table names thi humare query
+    //ko satisfy krne wali saari result me save hojaengi
+    List<int> resultIds = [];
+    result.forEach((element) {
+      if(element["title"].toString().toLowerCase().contains(query) || element["content"].toString().toLowerCase().contains(query)){
+        resultIds.add(element["id"] as int);
+      //ye line check krta ki humari query title me h ya content me
+      }
+
+    });
+
+
+    return resultIds;
+
+  }
+
 //to delete a note
   Future deleteNode(Note note) async{
   final db = await instance.database ;

@@ -5,7 +5,7 @@ import 'model/MyNoteModel.dart';
 import 'NoteView.dart';
 
 class EditNoteView extends StatefulWidget {
-Note note ;
+Note? note ;
 EditNoteView({required this.note}) ;
 
   @override
@@ -19,8 +19,8 @@ class _EditNoteViewState extends State<EditNoteView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    this.NewTitle = widget.note.title.toString();
-    this.NewNoteDet = widget.note.content.toString();
+    this.NewTitle = widget.note!.title.toString();
+    this.NewNoteDet = widget.note!.content.toString();
   }
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,8 +30,8 @@ class _EditNoteViewState extends State<EditNoteView> {
        IconButton(
          splashRadius: 19,
            onPressed: () async{
-           Note newNote = Note(pin: false, id: widget.note.id
-               ,content: NewNoteDet , title: NewTitle , createdTime: widget.note.createdTime);
+           Note newNote = Note(pin: false, id: widget.note!.id
+               ,content: NewNoteDet , title: NewTitle , createdTime: widget.note!.createdTime);
            await NotesDatabase.instance.updateNote(newNote);
            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NoteView(note: newNote)));
            }, icon: Icon(Icons.save))

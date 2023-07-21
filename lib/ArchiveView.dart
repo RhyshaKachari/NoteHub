@@ -181,7 +181,7 @@ class _ArchiveState extends State<Archive> {
               staggeredTileBuilder: (index) => StaggeredTile.fit(2),
               itemBuilder: (context,index)=>   InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView()));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => NoteView(note: ,)));
                 },
                 child: Container(
                   padding: EdgeInsets.all(10),

@@ -3,7 +3,7 @@ import 'package:notehub/EditNoteView.dart';
 import 'package:notehub/colors.dart';
 import 'package:notehub/model/MyNoteModel.dart';
 class NoteView extends StatefulWidget {
- Note note ;
+ Note? note ;
  NoteView({required this.note});
 
   @override
@@ -38,9 +38,9 @@ class _NoteViewState extends State<NoteView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.note.title, style: TextStyle(color: white ,fontSize: 23 , fontWeight: FontWeight.bold),),
+            Text(widget.note!.title, style: TextStyle(color: white ,fontSize: 23 , fontWeight: FontWeight.bold),),
             SizedBox(height: 10,),
-            Text(widget.note.content,style: TextStyle(color: white),)
+            Text(widget.note!.content,style: TextStyle(color: white),)
           ],
         ),
       ),
