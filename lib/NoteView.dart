@@ -29,7 +29,7 @@ class _NoteViewState extends State<NoteView> {
           IconButton(
               splashRadius: 19,
               onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => EditNoteView()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => EditNoteView(note: widget.note)));
               }, icon: Icon(Icons.edit_outlined))
         ],
       ),
