@@ -91,9 +91,9 @@ Future _createDB(Database db , int version) async{
   }
 
 //to delete a note
-  Future deleteNode(Note note) async{
+  Future deleteNode(Note? note) async{
   final db = await instance.database ;
-  await db!.delete(NotesImpNames.TableName , where: '${NotesImpNames.id} = ?',whereArgs: [note.id]);
+  await db!.delete(NotesImpNames.TableName , where: '${NotesImpNames.id} = ?',whereArgs: [note!.id]);
   }
 
   Future closeDB() async{

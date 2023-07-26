@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:notehub/EditNoteView.dart';
 import 'package:notehub/colors.dart';
+import 'package:notehub/home.dart';
 import 'package:notehub/model/MyNoteModel.dart';
+import 'package:notehub/services/db.dart';
 class NoteView extends StatefulWidget {
  Note? note ;
  NoteView({required this.note});
@@ -30,7 +32,13 @@ class _NoteViewState extends State<NoteView> {
               splashRadius: 19,
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => EditNoteView(note: widget.note)));
-              }, icon: Icon(Icons.edit_outlined))
+              }, icon: Icon(Icons.edit_outlined)) ,
+          IconButton(
+              splashRadius: 19,
+              onPressed: () async{
+                await NotesDatabase.instance.deleteNode(widget.note);
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+              }, icon: Icon(Icons.delete_forever_outlined))
         ],
       ),
       body: Container(
