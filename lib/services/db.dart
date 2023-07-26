@@ -70,6 +70,14 @@ Future _createDB(Database db , int version) async{
       whereArgs: [note.id]
     );
   }
+
+  Future pinNote(Note? note) async{
+    final db = await instance.database ;
+    return await db!.update(NotesImpNames.TableName, {NotesImpNames.pin : !note!.pin ? 1 : 0}
+        ,where: "${NotesImpNames.id} = ?",
+        whereArgs: [note.id]
+    );
+  }
   Future<List<int>> getNoteString(String query) async{
 
     final db = await instance.database;
