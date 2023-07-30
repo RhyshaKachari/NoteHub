@@ -8,7 +8,7 @@ class NotesDatabase{
   Future<Database?>get database async{
     if(_database != null){
       return _database;}
-      _database = await _initializeDB('Notes.db');
+      _database = await _initializeDB('NewNotes.db');
       return _database ;
 
 }
@@ -28,6 +28,7 @@ Future _createDB(Database db , int version) async{
     CREATE TABLE Notes(
     ${NotesImpNames.id} $idType,
     ${NotesImpNames.pin} $boolType,
+    ${NotesImpNames.isArchive} $boolType,
     ${NotesImpNames.title} $textType,
     ${NotesImpNames.content} $textType,
     ${NotesImpNames.createdTime} $textType
@@ -74,6 +75,14 @@ Future _createDB(Database db , int version) async{
   Future pinNote(Note? note) async{
     final db = await instance.database ;
     return await db!.update(NotesImpNames.TableName, {NotesImpNames.pin : !note!.pin ? 1 : 0}
+        ,where: "${NotesImpNames.id} = ?",
+        whereArgs: [note.id]
+    );
+  }
+
+  Future archNote(Note? note) async{
+    final db = await instance.database ;
+    return await db!.update(NotesImpNames.TableName, {NotesImpNames.isArchive : !note!.isArchive ? 1 : 0}
         ,where: "${NotesImpNames.id} = ?",
         whereArgs: [note.id]
     );

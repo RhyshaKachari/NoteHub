@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:notehub/ArchiveView.dart';
 import 'package:notehub/EditNoteView.dart';
 import 'package:notehub/colors.dart';
 import 'package:notehub/home.dart';
 import 'package:notehub/model/MyNoteModel.dart';
 import 'package:notehub/services/db.dart';
+import 'package:notehub/ArchiveView.dart';
 class NoteView extends StatefulWidget {
  Note? note ;
  NoteView({required this.note});
@@ -14,11 +16,7 @@ class NoteView extends StatefulWidget {
 
 class _NoteViewState extends State<NoteView> {
 @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    print(widget.note!.pin);
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +33,10 @@ class _NoteViewState extends State<NoteView> {
               }, icon: Icon(widget.note!.pin ? Icons.push_pin : Icons.push_pin_outlined)),
           IconButton(
               splashRadius: 19,
-              onPressed: (){}, icon: Icon(Icons.archive_outlined)),
+              onPressed: () async{
+                await NotesDatabase.instance.archNote(widget.note);
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Archive()));
+              }, icon: Icon(widget.note!.isArchive ?Icons.archive : Icons.archive_outlined)),
           IconButton(
               splashRadius: 19,
               onPressed: (){

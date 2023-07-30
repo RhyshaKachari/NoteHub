@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-  createEntry(Note(pin: false, title: "Code with Rhysha", content: "la l ala all a", createdTime: DateTime.now()));
+  createEntry(Note(pin: false, title: "Welcome to Notehub", content: "la l ala all a",isArchive: false, createdTime: DateTime.now()));
   getAllNotes();
   }
   //to create note
