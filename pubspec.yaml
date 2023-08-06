@@ -42,6 +42,7 @@ dependencies:
   google_sign_in:
   flutter_signin_button:
   shared_preferences:
+  firebase_core:
 
 dev_dependencies:
   flutter_test:
