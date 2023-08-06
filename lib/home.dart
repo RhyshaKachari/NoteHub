@@ -7,7 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:notehub/services/db.dart';
 import "package:stack_trace/stack_trace.dart";
 import 'package:notehub/model/MyNoteModel.dart';
-
+import 'package:notehub/services/login_info.dart';
 import 'CreateNoteView.dart';
 class Home extends StatefulWidget {
 
@@ -20,6 +20,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   bool isLoading = true ;
   late List<Note> notesList;
+  late String? ImgUrl ;
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   String note = "THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS NOTE  THIS IS NOTE THIS IS NOTE THIS IS NOTE ";
   String note1 = "THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE THIS IS NOTE  THIS IS ";
@@ -37,11 +38,21 @@ class _HomeState extends State<Home> {
   }
   //to read notes
   Future getAllNotes() async{
+  LocalDataSaver.getImg().then((value){
+    if(this.mounted){
+      setState(() {
+        ImgUrl = value ;
+      });
+    }
+  });
    this.notesList =  await NotesDatabase.instance.readAllNotes();
-   setState(() {
-     isLoading = false;
-   });
-  }
+   if(this.mounted){
+     setState(() {
+       isLoading = false;
+     });
+   }
+   }
+
 
   //to get one note
   Future getOneNote(int id) async{
@@ -140,6 +151,9 @@ class _HomeState extends State<Home> {
                             //   // width: 9,
                             // ),
                             CircleAvatar(
+                              onBackgroundImageError: (Object, StackTrace){
+                               print("Ok") ;
+                              },
                               radius: 16,
                               backgroundColor: Colors.white,
                             )
