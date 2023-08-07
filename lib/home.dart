@@ -4,11 +4,13 @@ import 'package:notehub/SearchPage.dart';
 import 'package:notehub/SideMenuBar.dart';
 import 'package:notehub/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:notehub/services/auth.dart';
 import 'package:notehub/services/db.dart';
 import "package:stack_trace/stack_trace.dart";
 import 'package:notehub/model/MyNoteModel.dart';
 import 'package:notehub/services/login_info.dart';
 import 'CreateNoteView.dart';
+import 'login.dart';
 class Home extends StatefulWidget {
 
   const Home({Key? key}) : super(key: key);
@@ -150,12 +152,19 @@ class _HomeState extends State<Home> {
                             // SizedBox(
                             //   // width: 9,
                             // ),
-                            CircleAvatar(
-                              onBackgroundImageError: (Object, StackTrace){
-                               print("Ok") ;
+                            GestureDetector(
+                              onTap: (){
+                                signOut();
+                                LocalDataSaver.saveLoginData(false);
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Login()));
                               },
-                              radius: 16,
-                              backgroundColor: Colors.white,
+                              child: CircleAvatar(
+                                onBackgroundImageError: (Object, StackTrace){
+                                 print("Ok") ;
+                                },
+                                radius: 16,
+                                backgroundImage: NetworkImage(ImgUrl.toString()),
+                              ),
                             )
                           ],
                         ),
